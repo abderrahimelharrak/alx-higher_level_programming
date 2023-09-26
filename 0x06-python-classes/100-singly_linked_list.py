@@ -65,11 +65,11 @@ class SinglyLinkedList:
             nouveau.next_node = temp.next_node
             temp.next_node = nouveau
 
-    def __ptr__(self):
+    def __str__(self):
         """Definir the print() representation of a SinglyLinkedList."""
         values = []
         temp = self.__head
         while temp is not None:
-            values.append(ptr(temp.data))
+            values.append(str(temp.data))
             temp = temp.next_node
         return ('\n'.join(values))
