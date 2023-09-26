@@ -8,12 +8,12 @@ class Square:
         return (selfe.__size)
 
     @size.setter
-    def size(selfe, valeur):
-        if not isinstance(valeur, int):
+    def size(selfe, value):
+        if not isinstance(value, int):
             raise TypeError("size must be an integer")
-        elif valeur < 0:
+        elif value < 0:
             raise ValueError("size must be >= 0")
-        selfe.__size = valeur
+        selfe.__size = value
 
     def area(selfe):
         return (selfe.__size * selfe.__size)
