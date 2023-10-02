@@ -10,8 +10,8 @@ Example:
 N must be an integer greater than or equal to 4.
 
 Attributes:
-    board (list): A list of lists representing the chessboard.
-    solutions (list): A list of lists containing solutions.
+    bd (list): A list of lists representing the chessboard.
+    sols (list): A list of lists containing solutions.
 
 Solutions are represented in the format [[r, c], [r, c], [r, c], [r, c]]
 where `r` and `c` represent the row and column, respectively, where a
@@ -22,84 +22,82 @@ import sys
 
 def init_board(n):
     """Initialize an `n`x`n` sized chessboard with 0's."""
-    board = []
-    [board.append([]) for i in range(n)]
-    [row.append(' ') for i in range(n) for row in board]
-    return (board)
+    bd = []
+    [bd.append([]) for x in range(n)]
+    [row.append(' ') for x in range(n) for rowe in bd]
+    return (bd)
 
 
-def board_deepcopy(board):
+def board_deepcopy(bd):
     """Return a deepcopy of a chessboard."""
-    if isinstance(board, list):
-        return list(map(board_deepcopy, board))
-    return (board)
+    if isinstance(bd, list):
+        return list(map(bd_deepcopy, bd))
+    return (bd)
 
 
-def get_solution(board):
+def get_solution(bd):
     """Return the list of lists representation of a solved chessboard."""
-    solution = []
-    for r in range(len(board)):
-        for c in range(len(board)):
-            if board[r][c] == "Q":
-                solution.append([r, c])
+    sol = []
+    for r in range(len(bd)):
+        for c in range(len(bd)):
+            if bd[r][c] == "Q":
+                sol.append([r, c])
                 break
-    return (solution)
+    return (sol)
 
 
-def xout(board, row, col):
+def xout(bd, rowe, colum):
     """X out spots on a chessboard.
 
     All spots where non-attacking queens can no
     longer be played are X-ed out.
 
     Args:
-        board (list): The current working chessboard.
-        row (int): The row where a queen was last played.
-        col (int): The column where a queen was last played.
+        bd (list): The current working chessboard.
+        rowe (int): The row where a queen was last played.
+        colum (int): The column where a queen was last played.
     """
-    # X out all forward spots
-    for c in range(col + 1, len(board)):
-        board[row][c] = "x"
+    for c in range(colum + 1, len(bd)):
+        bd[rowe][c] = "x"
     # X out all backwards spots
-    for c in range(col - 1, -1, -1):
-        board[row][c] = "x"
+    for c in range(colum - 1, -1, -1):
+        bd[rowe][c] = "x"
     # X out all spots below
-    for r in range(row + 1, len(board)):
-        board[r][col] = "x"
+    for r in range(rowe + 1, len(bd)):
+        bd[r][colum] = "x"
     # X out all spots above
-    for r in range(row - 1, -1, -1):
-        board[r][col] = "x"
-    # X out all spots diagonally down to the right
-    c = col + 1
-    for r in range(row + 1, len(board)):
-        if c >= len(board):
+    for r in range(rowe - 1, -1, -1):
+        bd[r][colum] = "x"
+    c = colum + 1
+    for r in range(rowe + 1, len(bd)):
+        if c >= len(bd):
             break
-        board[r][c] = "x"
+        bd[r][c] = "x"
         c += 1
     # X out all spots diagonally up to the left
-    c = col - 1
-    for r in range(row - 1, -1, -1):
+    c = colum - 1
+    for r in range(rowe - 1, -1, -1):
         if c < 0:
             break
-        board[r][c]
+        bd[r][c]
         c -= 1
     # X out all spots diagonally up to the right
-    c = col + 1
-    for r in range(row - 1, -1, -1):
-        if c >= len(board):
+    c = colum + 1
+    for r in range(rowe - 1, -1, -1):
+        if c >= len(bd):
             break
-        board[r][c] = "x"
+        bd[r][c] = "x"
         c += 1
     # X out all spots diagonally down to the left
-    c = col - 1
-    for r in range(row + 1, len(board)):
+    c = colum - 1
+    for r in range(row + 1, len(bd)):
         if c < 0:
             break
-        board[r][c] = "x"
+        bd[r][c] = "x"
         c -= 1
 
 
-def recursive_solve(board, row, queens, solutions):
+def recursive_solve(bd, rowe, queens, sols):
     """Recursively solve an N-queens puzzle.
 
     Args:
@@ -111,7 +109,7 @@ def recursive_solve(board, row, queens, solutions):
         sols
     """
     if queens == len(bd):
-        solutions.append(get_solution(bd))
+        sols.append(get_sol(bd))
         return (sols)
 
     for c in range(len(board)):
