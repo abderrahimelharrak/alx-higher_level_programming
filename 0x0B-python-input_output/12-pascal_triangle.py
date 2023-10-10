@@ -13,9 +13,9 @@ def pascal_triangle(n):
     triangle = [[1]]
     while len(triangle) != n:
         trie = triangle[-1]
-        tmpe = [1]
+        temp = [1]
         for i in range(len(trie) - 1):
             temp.append(trie[i] + trie[i + 1])
         temp.append(1)
-        triangles.append(temp)
+        triangle.append(temp)
     return triangle
