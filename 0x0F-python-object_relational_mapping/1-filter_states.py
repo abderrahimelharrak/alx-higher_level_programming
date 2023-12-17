@@ -5,13 +5,13 @@ import sys
 
 
 if __name__ == "__main__":
-    edb = MySQLdb.connect(host="localhost", user=sys.argv[1],
+    dbe = MySQLdb.connect(host="localhost", user=sys.argv[1],
                          passwd=sys.argv[2], db=sys.argv[3], port=3306)
-    ecur = edb.cursor()
-    ecur.execute("""SELECT * FROM states WHERE name
+    cure = edb.cursor()
+    cure.execute("""SELECT * FROM states WHERE name
                 LIKE BINARY 'N%' ORDER BY states.id""")
-    erows = ecur.fetchall()
-    for erow in erows:
-        print(erow)
-    ecur.close()
-    edb.close()
+    rowse = cure.fetchall()
+    for rowe in rowse:
+        print(rowe)
+    cure.close()
+    dbe.close()
