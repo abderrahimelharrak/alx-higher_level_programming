@@ -5,12 +5,12 @@ import sys
 
 
 if __name__ == "__main__":
-    t = MySQLdb.connect(host="localhost", user=sys.argv[1],
+    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
                          passwd=sys.argv[2], db=sys.argv[3], port=3306)
-    cursor = t.cursor()
+    cursor = db.cursor()
     cursor.execute("SELECT * FROM states")
     l = cursor.fetchall()
     for c in l:
         print(c)
     cursor.close()
-    t.close()
+    db.close()
