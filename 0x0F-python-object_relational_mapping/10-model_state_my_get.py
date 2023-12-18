@@ -11,7 +11,7 @@ if __name__ == "__main__":
     moteur = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
                            .format(sys.argv[1], sys.argv[2], sys.argv[3]))
     Base.metadata.create_all(moteur)
-    xe = sessionmaker(bind=moteu)
+    Session = sessionmaker(bind=moteu)
     x = Session()
     y = x.query(State).filter(State.name == (sys.argv[4],))
     try:
